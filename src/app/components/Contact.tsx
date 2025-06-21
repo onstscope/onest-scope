@@ -16,7 +16,7 @@ const almarai = Almarai({
 const PROPERTY_OPTIONS = [
   ' دور أرضي',
   ' دور أول',
-  'شقة دور علوي',
+  'شقة ',
 ];
 
 export default function ContactForm() {
