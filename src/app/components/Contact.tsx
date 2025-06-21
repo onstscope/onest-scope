@@ -4,6 +4,8 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Almarai } from 'next/font/google';
 import { Phone, Send } from 'lucide-react';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 const almarai = Almarai({
   subsets: ['arabic'],
@@ -11,11 +13,19 @@ const almarai = Almarai({
   display: 'swap',
 });
 
+const PROPERTY_OPTIONS = [
+  'شقة دور أرضي',
+  'شقة دور أول',
+  'شقة دور علوي',
+];
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
+    propertyType: '',
     message: '',
+  
   });
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -25,6 +35,10 @@ export default function ContactForm() {
   ) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSelectProperty = (value: string) => {
+    setFormData(prev => ({ ...prev, propertyType: value }));
   };
 
   const submitForm = async (e: React.FormEvent) => {
@@ -37,7 +51,6 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
       if (!res.ok) throw new Error('Failed to send');
-      // فتح الاتصال بالهاتف مباشرة دون تفريغ الحقول
       window.open('tel:0501402723', '_self');
     } catch {
       alert('حدث خطأ أثناء الإرسال، حاول مرة أخرى.');
@@ -48,9 +61,9 @@ export default function ContactForm() {
 
   const sendToWhatsApp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const { fullName, phoneNumber, message } = formData;
+    const { fullName, phoneNumber, message, propertyType } = formData;
     const msg = encodeURIComponent(
-      `الاسم: ${fullName}\nالهاتف: ${phoneNumber}\nرسالتك: ${message}`
+      `الاسم: ${fullName}\nالهاتف: ${phoneNumber}\nالعقار: ${propertyType}\nرسالتك: ${message}`
     );
     window.open(`https://wa.me/966501402723?text=${msg}`, '_blank');
   };
@@ -58,6 +71,7 @@ export default function ContactForm() {
   return (
     <section id="contact" className="bg-gray-50 py-20" dir="rtl">
       <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        {/* العنوان مع الخط المتحرك */}
         <div className="text-center mb-6">
           <h2 className={`${almarai.className} text-4xl font-bold text-gray-900`}>
             سجل اهتمامك
@@ -86,9 +100,11 @@ export default function ContactForm() {
             </motion.svg>
           </div>
         </div>
+
         <p className={`${almarai.className} text-center text-gray-600 mb-8`}>
           املأ البيانات وسنتواصل معك قريبًا
         </p>
+
         <div className="bg-white shadow-lg rounded-2xl p-8">
           <form
             ref={formRef}
@@ -127,6 +143,41 @@ export default function ContactForm() {
                 disabled={loading}
                 className="w-full bg-gray-100 text-gray-800 placeholder-gray-500 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-right"
               />
+            </div>
+
+            {/* اختيار نوع العقار */}
+            <div className="sm:col-span-2">
+              <label htmlFor="propertyType" className={`${almarai.className} block text-gray-700 mb-2`}>
+                اختر العقار المناسب
+              </label>
+              <Menu as="div" className="relative inline-block w-full text-left">
+                <MenuButton
+                  className="inline-flex w-full justify-between items-center rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  disabled={loading}
+                >
+                  {formData.propertyType || '-- اختر --'}
+                  <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                </MenuButton>
+                <MenuItems className="absolute right-0 z-10 mt-1 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+                  <div className="py-1">
+                    {PROPERTY_OPTIONS.map(option => (
+                      <MenuItem key={option}>
+                        {({ active }) => (
+                          <button
+                            type="button"
+                            onClick={() => handleSelectProperty(option)}
+                            className={`${
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                            } block w-full px-4 py-2 text-sm text-right`}
+                          >
+                            {option}
+                          </button>
+                        )}
+                      </MenuItem>
+                    ))}
+                  </div>
+                </MenuItems>
+              </Menu>
             </div>
 
             {/* رسالتك */}
