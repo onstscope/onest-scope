@@ -14,8 +14,8 @@ const almarai = Almarai({
 });
 
 const PROPERTY_OPTIONS = [
-  'شقة دور أرضي',
-  'شقة دور أول',
+  ' دور أرضي',
+  ' دور أول',
   'شقة دور علوي',
 ];
 
