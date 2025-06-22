@@ -80,7 +80,7 @@ const listings: Listing[] = [
   {
     id: '3',
     title: 'شقة دور علوي',
-    coverImageUrl: '/img/imgupvip/imgupviptitle.webp',
+    coverImageUrl: '/img/imgupvip/imgviptitle.webp',
     imageUrls: [
       '/img/imgupvip/imgvip1.webp',
       '/img/imgupvip/imgvip2.webp',
