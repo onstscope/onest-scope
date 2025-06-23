@@ -31,8 +31,8 @@ export const metadata = {
     url: 'https://onestscope.com/riyadh-hai-alrimal',
     images: [
       {
-        url: 'https://onestscope.com/logo.webp', // هنا اللوجو بدلاً من rimal-cover
-        width: 600,   // حجم افتراضي مناسب للوجو
+        url: 'https://onestscope.com/logo.webp',
+        width: 600,
         height: 60,
         alt: 'شعار Onset Scope'
       }
@@ -40,10 +40,10 @@ export const metadata = {
     siteName: 'Onset Scope',
   },
   twitter: {
-    card: 'summary',       // لوجو صغير يكفي
+    card: 'summary',
     title: 'شقق ووحدات سكنية للبيع في حي الرمال – الرياض',
     description: 'اكتشف أفضل الوحدات السكنية للبيع في حي الرمال بالرياض مع ضمانات كاملة.',
-    images: ['https://onestscope.com/logo.webp'], // اللوجو
+    images: ['https://onestscope.com/logo.webp'],
   },
 };
 
@@ -57,6 +57,27 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         `}
       >
         <Navbar />
+
+        {/* === Snap Pixel === */}
+        <Script
+          id="snap-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              ;(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function(){
+                a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)
+              };a.queue=[];var s="script";r=t.createElement(s);
+              r.async=!0;r.src=n;p=t.getElementsByTagName(s)[0];
+              p.parentNode.insertBefore(r,p)
+              })(window,document,"https://sc-static.net/scevent.min.js");
+
+              snaptr("init", "fea14130-0593-4dc1-a413-c05dc033b078", {});
+              snaptr("track", "PAGE_VIEW");
+            `,
+          }}
+        />
+        {/* === End Snap Pixel === */}
+
         <Script id="ld+json" type="application/ld+json">
           {`
           {
