@@ -14,9 +14,8 @@ const almarai = Almarai({
   display: 'swap',
 });
 
-// بيانات الـ SEO
 export const metadata = {
-  title: ' Onset Scope',
+  title: 'Onset Scope',
   description: 'اكتشف أفضل الوحدات السكنية للبيع في حي الرمال بالرياض. ضمن بنية تحتية حديثة، ضمانات كاملة، وخدمات متكاملة لتجربة شراء مريحة وآمنة.',
   keywords: [
     'عقارات الرياض',
@@ -58,26 +57,32 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <Navbar />
 
-        {/* === Snap Pixel === */}
+        {/* === Snap Pixel Code === */}
         <Script
           id="snap-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              ;(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function(){
+              (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function(){
                 a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)
-              };a.queue=[];var s="script";r=t.createElement(s);
-              r.async=!0;r.src=n;p=t.getElementsByTagName(s)[0];
-              p.parentNode.insertBefore(r,p)
-              })(window,document,"https://sc-static.net/scevent.min.js");
+              };
+              a.queue=[];
+              var s='script';
+              r=t.createElement(s);
+              r.async=!0;
+              r.src=n;
+              var u=t.getElementsByTagName(s)[0];
+              u.parentNode.insertBefore(r,u);
+              })(window,document,'https://sc-static.net/scevent.min.js');
 
-              snaptr("init", "fea14130-0593-4dc1-a413-c05dc033b078", {});
-              snaptr("track", "PAGE_VIEW");
+              snaptr('init', '320c4e31-da2b-4fd3-8cf8-a5ecdf50c2bf', {});
+              snaptr('track', 'PAGE_VIEW');
             `,
           }}
         />
         {/* === End Snap Pixel === */}
 
+        {/* === JSON-LD Structured Data === */}
         <Script id="ld+json" type="application/ld+json">
           {`
           {
