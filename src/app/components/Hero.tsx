@@ -38,16 +38,16 @@ export default function Hero() {
   }
 
   // دالة تمرير سلس إلى قسم About
-  const scrollToAbout = (e: React.MouseEvent) => {
+  const scrollToContact = (e: React.MouseEvent) => {
     e.preventDefault()
-    const aboutSection = document.getElementById('about')
+    const aboutSection = document.getElementById('contact')
     if (aboutSection) {
       aboutSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
   return (
-    <section id="contact" className="relative h-screen overflow-hidden">
+    <section id="hero" className="relative h-screen overflow-hidden">
       <AnimatePresence initial={false}>
         {/* الصورة السابقة بتاريخ حركة fade-out */}
         {prev !== null && (
@@ -116,8 +116,8 @@ export default function Hero() {
         </motion.p>
 
         <motion.a
-          href="#about"
-          onClick={scrollToAbout}
+          href="#contact"
+          onClick={scrollToContact}
           className="inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-500 text-white font-bold px-8 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-105"
           variants={contentVariants}
           initial="hidden"
