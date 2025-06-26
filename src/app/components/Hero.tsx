@@ -47,7 +47,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="relative h-screen overflow-hidden">
+    <section id="contact" className="relative h-screen overflow-hidden">
       <AnimatePresence initial={false}>
         {/* الصورة السابقة بتاريخ حركة fade-out */}
         {prev !== null && (
