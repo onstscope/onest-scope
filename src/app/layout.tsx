@@ -56,7 +56,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         `}
       >
         <Navbar />
-
+{/* === Google Tag (gtag.js) === */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QDBSTPCTCE"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QDBSTPCTCE');
+          `}
+        </Script>
+        {/* === End Google Tag === */}
         {/* === Snap Pixel Code === */}
         <Script
           id="snap-pixel"
